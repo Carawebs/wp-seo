@@ -1,0 +1,20 @@
+{
+    "name": "carawebs/wp-seo",
+    "description": "Simple SEO for WordPress.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "David Egan",
+            "email": "david@carawebs.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Carawebs\\SEO\\": "src"
+        }
+    },
+    "require": {
+        "carawebs/wp-plugin-settings": "^1.0"
+    }
+}

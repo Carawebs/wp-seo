@@ -1,0 +1,8 @@
+# Include your project-specific ignores in this file
+# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+vendor
+config/*
+!config/.gitkeep
+!config/form-config
+!config/form-config/.gitkeep
+composer.lock
