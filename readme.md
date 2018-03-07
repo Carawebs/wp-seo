@@ -13,4 +13,4 @@ This plugin preferentially uses data stored as postmeta fields:
 * `meta_description`
 * `title_tag`
 
-Falls back to rational defaults (i.e. post/page excerpt). Just include meta boxes to capture these metadata fields on any content type that you want to have access to the fine-tuning functionality.
+Falls back to rational defaults (i.e. post/page excerpt). Just include meta boxes to capture these metadata fields on any content type that you want to have access to the fine-tuning functionality. If the field is populated, it will be included in `<head>`. Open Graph tags are also constructed and included, using the site name and the post featured image for the og image tag.
