@@ -1,8 +1,7 @@
 <?php
 namespace Carawebs\SEO;
 
-use Carawebs\SEO\Data\MetaTags;
-use Carawebs\SEO\Data\OpenGraph;
+use Carawebs\SEO\Data\Display;
 
 if (!defined('ABSPATH')) exit;
 /**
@@ -44,11 +43,10 @@ class Plugin
     public function init()
     {
         if (true === $this->bail) return;
-
-        // add_action('wp_head', function() { echo "Test!!!!!!!!!!!!!!!!!!!!!!!!";});
         add_action('wp', function() {
-            new MetaTags();
-            new OpenGraph();
+            // new MetaTags();
+            // new OpenGraph();
+            new Display();
             $this->onActivation();
             $this->onDeactivation();
         });

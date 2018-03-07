@@ -7,18 +7,25 @@ namespace Carawebs\SEO\Data;
 * @package Carawebs\SEO
 * @author David Egan <david@carawebs.com>
 */
-class MetaTags {
-
+class Base {
     protected $metaDescription;
     protected $title;
     protected $postId;
+    protected $type;
+    protected $image;
+    protected $url;
+    protected $locale;
+    protected $siteName;
 
     public function __construct() {
         $this->setId();
         $this->setTitle();
         $this->setMetaDescription();
-        //$this->og = $ogObject;
-        $this->hook();
+        $this->setType();
+        $this->setImage();
+        $this->setUrl();
+        $this->setLocale();
+        $this->setSiteName();
     }
 
     private function setId() {
@@ -45,19 +52,6 @@ class MetaTags {
             $customDescription = $this->customExcerpt(155);
         }
         $this->MetaDescription = $customDescription;
-    }
-
-    /**
-    * Output meta-description
-    * @return string The meta description
-    */
-    public function outputMetaDescription()
-    {
-        ob_start();
-        ?>
-        <meta name="description" content="<?= $this->MetaDescription; ?>">
-        <?php
-        echo ob_get_clean();
     }
 
     /**
@@ -115,21 +109,48 @@ class MetaTags {
     }
 
     /**
-    * Get open graph tags
-    * @return void
+    * Set og type
     */
-    public function ogTags()
+    private function setType()
     {
-        $og->og_tags();
+        $this->type = is_front_page() ? 'website' : 'article';
     }
 
     /**
-    * Output into the document
-    * @return void
+    * Set image URL for this post
     */
-    public function hook() {
-        add_filter('pre_get_document_title', [$this, 'getTitle'], 10);
-        add_filter('wp_head', [$this, 'outputMetaDescription'], 1);
-        //add_filter('wp_head', [$this, 'ogTags'], 2 );
+    private function setImage()
+    {
+        $this->image = wp_get_attachment_url(get_post_thumbnail_id($this->postId));
+        if(!has_post_thumbnail($this->postId)) {
+            $this->image = esc_url( home_url( '/wp-content/uploads/2016/01/0086-1small.jpg' ) );
+        } else {
+            $thumbnail_src = wp_get_attachment_image_src(get_post_thumbnail_id($this->postId), 'medium');
+            $this->image = esc_url(home_url()) . esc_attr($thumbnail_src[0]);
+        }
+    }
+
+    /**
+    * Set the post URL
+    */
+    private function setUrl()
+    {
+        $this->url = get_the_permalink();
+    }
+
+    /**
+    * Set the locale
+    */
+    private function setLocale()
+    {
+        $this->locale = "en_US";
+    }
+
+    /**
+    * Set the site name
+    */
+    private function setSiteName()
+    {
+        $this->siteName = esc_html( get_bloginfo('name') );
     }
 }
