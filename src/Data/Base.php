@@ -44,7 +44,7 @@ class Base {
     private function setMetaDescription()
     {
         if(is_archive()) {
-            $customDescription = get_the_archive_description();
+            $customDescription = wp_strip_all_tags(wp_strip_all_tag(get_the_archive_description(), 0, 155), TRUE);
         } else {
             $customDescription = get_post_meta( $this->postId, 'meta_description', TRUE );
         }
