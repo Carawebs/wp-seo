@@ -2,6 +2,7 @@
 namespace Carawebs\SEO;
 
 use Carawebs\SEO\Data\Display;
+use Carawebs\SEO\Autoloader;
 
 if (!defined('ABSPATH')) exit;
 /**
