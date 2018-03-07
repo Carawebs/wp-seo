@@ -63,8 +63,8 @@ class Base {
     {
         $postObject = get_post( $this->postId );
         if (empty($postObject)) return;
-        if ( empty( $postObject->post_excerpt ) ) {
-            return wp_strip_all_tags( substr( $postObject->post_content, 0, $characters ), TRUE );
+        if (empty( $postObject->post_excerpt)) {
+            return wp_strip_all_tags(substr($postObject->post_content, 0, $characters ), TRUE);
         } else {
             return wp_kses_post( $postObject->post_excerpt );
         }
@@ -78,15 +78,15 @@ class Base {
     */
     private function setTitle()
     {
-        if( is_archive() ) {
+        if(is_archive()) {
             $customTitle = get_bloginfo() . ' | ' . get_the_archive_title();
         } else {
-            $customTitle = get_post_meta( $this->postId, 'title_tag', TRUE );
+            $customTitle = get_post_meta($this->postId, 'title_tag', TRUE);
         }
-        if ( empty( $customTitle ) ) {
-            $customTitle = $this->customTitle( 55 );
+        if (empty($customTitle )) {
+            $customTitle = $this->customTitle(55);
         }
-        $this->title = wp_strip_all_tags( $customTitle, TRUE );
+        $this->title = wp_strip_all_tags($customTitle, TRUE);
     }
 
     /**
