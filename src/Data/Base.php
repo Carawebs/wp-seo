@@ -62,6 +62,7 @@ class Base {
     private function customExcerpt($characters = 155)
     {
         $postObject = get_post( $this->postId );
+        if (empty($postObject)) return;
         if ( empty( $postObject->post_excerpt ) ) {
             return wp_strip_all_tags( substr( $postObject->post_content, 0, $characters ), TRUE );
         } else {
